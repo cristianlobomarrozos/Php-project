@@ -2,19 +2,25 @@
 
 	require_once("../libs/Database_mysqli.php") ;
 	require_once("../libs/Modelo.php") ;
+	require_once("../libs/Sesion.php") ;
 	require_once("../libs/Marca.php") ;
 
 	include("../css/bootstrap.php") ;
 
 	$db = Database::getInstance("root", "", "coches") ;
 
+	$sesion = Sesion::getInstance() ;
+	if (!$sesion->checkActiveSession()) 
+		 $sesion->redirect("../index.php") ;
+	
+	$usr = $_SESSION["usuario"] ;
 
-
-	//$modelo = $_POST["modelo"] ;
-	//$marca = $_POST["marca"] ;
-	//$potencia = $_POST["potencia"] ;
-	//$año = $_POST["año"] ;
-	//$esClasico = $_POST["esClasico"] ;
+	$esAdmin = $usr->getEsAdmin() ;
+    //echo $esAdmin ;
+    
+    if (!$esAdmin):
+        $sesion->redirect("../index.php") ;
+    else:
 
 	//echo "<pre>".print_r($_GET, true)."</pre>" ;
 
@@ -24,12 +30,12 @@
 	$db->query("SELECT * FROM modelo WHERE CodMod=$id") ;
 	$result = $db->getObject("Modelo") ;
 
-	echo "<pre>".print_r($result, true)."</pre>" ;
+	//echo "<pre>".print_r($result, true)."</pre>" ;
 			$modelo = $result->getNomMod() ;
 			$marca = $result->getCodMar() ;
 			$potencia = $result->getPotencia() ;
 			$año = $result->getAño() ;
-			$esClasico = $result->getClasico() ;
+			$esClasico = $result->esClasico ;
 			$descripcion = $result->getDescripcion() ;
 			$precio = $result->getPrecio() ;
 
@@ -44,11 +50,24 @@
 
 
 			<form action="Update.php">
+				<div class="form-group">
 					<input type="hidden" name="ids" value="<?= $id ?>">
-					<input type="text" name="modelo" value="<?= $modelo ?>">
-					<input type="int" name="potencia" value="<?= $potencia ?>">
-					<input type="int" name="año" value="<?= $año ?>">
-					<select name="marca">
+				</div>
+				<div class="form-group">
+					<label>Modelo:</label>
+					<input type="text" class="form-control" name="modelo" value="<?= $modelo ?>">
+				</div>
+				<div class="form-group">
+					<label>Potencia:</label>
+					<input type="int" class="form-control" name="potencia" value="<?= $potencia ?>">
+				</div>
+				<div class="form-group">
+					<label>Año:</label>
+					<input type="int" class="form-control" name="año" value="<?= $año ?>">
+				</div>
+				<div class="form-group">
+					<label>Marca:</label>
+					<select class="form-control" name="marca">
 						 <!--<option selected value="0"> -- Elija una opción -- </option>-->
 	                        <?php
 	                            $db->query("SELECT * FROM marca") ;
@@ -70,30 +89,40 @@
 	                            }while($item) ;
 	                        ?>
                     </select>
-                    <input type="text" name="descripcion" value="<?= $descripcion ?>">
-					<input type="float" name="precio" value="<?= $precio ?>">
-					<select name="esClasico">
-							<option value="0" <?php 
-												if($esClasico):
-													echo "" ;
-												else:
-													echo "selected" ;
-												endif;  ?>>No</option>
-                            <option value="1" <?php 
-												if($esClasico):
-													echo "" ;
-												else:
-													echo "selected" ;
-												endif;  ?>>Si</option>
+                </div>
+                <div class="form-group">
+                	<label>Descripción:</label>
+                    <input type="text" class="form-control" name="descripcion" value="<?= $descripcion ?>">
+                </div>
+                <div class="form-group">
+                	<label>Precio:</label>
+					<input type="float" class="form-control" name="precio" value="<?= $precio ?>">
+				</div>
+				<div class="form-group">
+					<label>Es Clásico:</label>
+					<select class="form-control" name="esClasico">
+						<?php
+						echo $esClasico ;
+							if($esClasico):
+								echo "<option selected value=\"1\">Sí</option>" ;
+								echo "<option value=\"0\">No</option>" ;
+							else:
+								echo "<option value=\"1\">Sí</option>" ;
+								echo "<option selected value=\"0\">No</option>" ;
+							endif;
+						?>
                     </select>
+                </div>
                         <button type="submit" class="btn btn-success">Update</button>
 				</form>
 
+				<form>
 
 			<?php
 			//header("Location: Update.php?id=$id") ;
 				
 			break;
 	endswitch;
+endif;
 
 ?>

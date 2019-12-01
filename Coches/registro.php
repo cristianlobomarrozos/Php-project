@@ -1,40 +1,5 @@
 <?php
 	
-	/*
-	require_once "libs/Database.php" ;
-	
-	if (!empty($_POST)):
-		$array = [
-				$email = $_POST["email"] ,
-				$nombre = $_POST["nombre"] ,
-				$apellidos = $_POST["apellidos"] ,
-				$password = $_POST["pass"] ,
-				$confirmacion = $_POST["conf"] ,
-				$fecha_nac = !empty($_POST["fnac"])?$_POST["fnac"]:null ,
-			] ;
-
-		echo "<pre>".print_r($_POST,true)."</pre>" ;
-
-		echo "<pre>".print_r($array, true)."</pre>";
-
-		echo count($array) ;
-
-
-		if ($password == $confirmacion):
-			$db = Database::getInstance("root", "", "coches") ;
-
-			$sql = "INSERT INTO usuario (NomUsu, email, pass, ApeUsu, FecNacUsu) " ;
-			$sql.= "VALUES (?, ??, md5(???), ????, ?????)" ;
-
-			$db->consulta($sql, $email, $nombre, $apellidos, $password, $fecha_nac) ;
-		else:
-			$error = "Las contraseñas no coinciden." ;
-
-		endif;
-
-		
-		endif;
-	*/
 	if (!empty($_POST)):
 		
 		$email = $_POST["email"] ;
