@@ -26,10 +26,11 @@
 					
 				</div>
 				<div class="col-md-3">
+					<!--
 					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 					  <div class="carousel-inner">
 					    <div class="carousel-item active">
-					      <img class="d-block w-100" src="..." alt="First slide">
+					      <img class="d-block w-100" src="./images/coches/<?=$consulta->getNomMod()?>.jpg" alt="<?= $consulta->getNomMod() ?>">
 					    </div>
 					    <div class="carousel-item">
 					      <img class="d-block w-100" src="..." alt="Second slide">
@@ -45,19 +46,28 @@
 					  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
 					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 					    <span class="sr-only">Next</span>
-					  </a>
+					  </a>-->
+					  <img src="./images/coches/<?=$consulta->getNomMod()?>.jpg" alt="<?= $consulta->getNomMod() ?>">
 					</div>
 				</div>
 				<div>
 					<p>
-						<?=	$año ?>, <?= $potencia ?></p><br/> 
+						Año <?=	$año ?> </p>
+					<p>	Potencia(en caballos): <?= $potencia ?>CV</p><br/> 
 
+					<p>
 						<?= $consulta->getDescripcion() ?>
 					</p>
 				</div>
 				<div class="font-weight-bold text-right" style="font-size: 2vw;">
 					<?= $consulta->getPrecio() ?>€
 				</div>
+				<form action="compra.php">
+					<input id="id" type="hidden" name="id" value="<?=$id?>" />
+					<div class="p-1">
+						<button type="submit" class="btn btn-primary">Comprar</button>
+					</div>
+				</form>
 			</div>
 		
 

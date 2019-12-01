@@ -52,6 +52,7 @@
 						echo "<a class=\"dropdown1\" href=\"javascript:void(0)\">".$usu->getNombre()."</a>" ;
 						echo "<div class=\"dropdown1-content\">"; 
 						echo "<a href=\"perfil.php\">Perfil</a>";
+						echo "<a href=\"pedidos.php\">Historial compras</a>";
 						//echo "<a href=\"#\">Ajustes</a>";
 						echo "<a href=\"logout.php\">Logout</a>" ;
 

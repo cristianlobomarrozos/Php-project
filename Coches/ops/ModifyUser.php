@@ -1,12 +1,25 @@
 <?php
 
 	require_once("../libs/Database_mysqli.php") ;
+	require_once("../libs/Sesion.php") ;
 	require_once("../libs/Usuario.php") ;
 
 	include("../css/bootstrap.php") ;
 
 	$db = Database::getInstance("root", "", "coches") ;
 
+	$sesion = Sesion::getInstance() ;
+	if (!$sesion->checkActiveSession()) 
+		 $sesion->redirect("../index.php") ;
+	
+	$usr = $_SESSION["usuario"] ;
+
+	$esAdmin = $usr->getEsAdmin() ;
+    //echo $esAdmin ;
+    
+    if (!$esAdmin):
+        $sesion->redirect("../index.php") ;
+    else:
 	$cop = $_GET["cop"] ;
 	$id = $_GET["id"] ;
 
@@ -53,5 +66,6 @@
 				
 			break;
 	endswitch;
+endif;
 
 ?>

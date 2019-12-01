@@ -3,6 +3,7 @@
 
 	require_once("./libs/Database_mysqli.php") ;
     require_once("./libs/Modelo.php") ;
+    require_once("./libs/Sesion.php") ;
 	require_once("./libs/Marca.php") ;
 
 	$db = Database::getInstance("root", "", "coches") ;
@@ -10,10 +11,19 @@
 
     $ses = Sesion::getInstance() ;
 
-    if (!$ses->checkActiveSession())
+    if (!$ses->checkActiveSession()) 
          $ses->redirect("index.php") ;
 
     $usr = $_SESSION['usuario'] ;
+
+    //echo "<pre>".print_r($usr, true)."</pre>" ;
+
+    $esAdmin = $usr->getEsAdmin() ;
+    //echo $esAdmin ;
+    
+    if (!$esAdmin):
+        $ses->redirect("index.php") ;
+    else:
 
 
     if($usr->getEsAdmin()):
@@ -135,6 +145,7 @@
     else:
          $ses->redirect("index.php") ;
     endif;
+endif;
 ?>
 </table>  
     
