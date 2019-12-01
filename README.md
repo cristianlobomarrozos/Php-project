@@ -10,3 +10,4 @@ Ambos tipos de usuarios pueden navegar por las pestañas de los vehículos y rea
 
 La funcionalidad de compra todavía no está del todo implementada, pero si le das a comprar, realiza la inserción en la tabla de pedido.
 
+Cada usuario puede acceder a su perfil y, dentro de él, puede cambiar su imagen de perfil.
