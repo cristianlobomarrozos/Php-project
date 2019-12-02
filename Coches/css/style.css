@@ -3,6 +3,17 @@
   padding: 0;
 }
 
+body, html {
+  min-height: 100% !important ;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  align-content: space-between;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -54,3 +65,11 @@ li.dropdown1 {
 .dropdown1:hover .dropdown1-content {
   display: block;
 }
+
+footer {
+  position: static;
+  min-width: 100%;
+  background: #333;
+  bottom: 0;
+}
+

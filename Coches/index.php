@@ -2,11 +2,11 @@
 	include("libs/Navbar.php");
 ?>
 	<div class="container-fluid">
-	<div class="row">
+	<!--<div class="row">
 		<div class="col-md-12">
 			
 		</div>
-	</div>
+	</div>-->
 	<div class="row">
 		<div class="col-md-6">
 			<h2>
